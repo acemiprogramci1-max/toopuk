@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ARGENT | Premium Çorap Koleksiyonu</title>
+  <title>TOOPUK | Premium Çorap Koleksiyonu</title>
   
   <!-- Tailwind CSS & FontAwesome CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -46,7 +46,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Gümüş / Metalik Bordür ve Rozetler */
     .silver-gradient-border {
       border: 1px solid transparent;
       background: linear-gradient(#ffffff, #ffffff) padding-box,
@@ -66,7 +65,6 @@
       transform: scale(1.08);
     }
 
-    /* İnce kaydırma çubuğu */
     ::-webkit-scrollbar {
       width: 4px;
       height: 4px;
@@ -77,10 +75,10 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-slate-800 selection:text-white">
+<body class="min-h-screen flex flex-col justify-between selection:bg-slate-800 selection:text-white" onmouseleave="handleExitIntent(event)">
 
   <!-- 1. ÜST BİLGİ BANDI -->
-  <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-slate-200 text-[11px] tracking-widest uppercase py-2.5 px-4 text-center border-b border-slate-700/50 flex justify-center items-center gap-4">
+  <div class="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-slate-200 text-[11px] tracking-widest uppercase py-2 px-4 text-center border-b border-slate-700/50 flex justify-center items-center gap-4">
     <span>✨ İtalyan İplik & 200 İğne Sık Dokuma Ayrıcalığı</span>
     <span class="hidden md:inline text-slate-500">•</span>
     <span class="hidden md:inline text-slate-300">500 ₺ Üzeri Siparişlerde Özel Kutusunda Ücretsiz Kargo</span>
@@ -90,13 +88,13 @@
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-silver-200 transition-all">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-6">
       
-      <!-- Marka Logosu -->
+      <!-- Marka Logosu: TOOPUK -->
       <a href="#" class="flex flex-col">
-        <span class="font-serif text-xl sm:text-2xl font-bold tracking-[0.25em] text-slate-900">ARGENT</span>
+        <span class="font-serif text-xl sm:text-2xl font-bold tracking-[0.25em] text-slate-900">TOOPUK</span>
         <span class="text-[9px] tracking-[0.4em] text-silver-400 uppercase -mt-1 font-semibold">Atelier & Socks</span>
       </a>
 
-      <!-- Minimal Arama Kutusu -->
+      <!-- Arama Kutusu -->
       <div class="flex-1 max-w-md hidden md:block">
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-silver-400 text-xs"></i>
@@ -110,11 +108,16 @@
         </div>
       </div>
 
-      <!-- Sağ Aksiyonlar: İletişim, Favori, Sepet -->
+      <!-- Aksiyon Butonları -->
       <div class="flex items-center gap-3 sm:gap-5">
-        <button onclick="openInfoModal('contact')" class="hidden sm:flex items-center gap-1.5 text-xs text-slate-600 hover:text-black font-semibold transition">
-          <i class="fa-regular fa-comment-dots text-sm"></i>
-          <span>Destek</span>
+        <button onclick="scrollToBoxCreator()" class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-silver-100 hover:bg-silver-200 text-slate-800 text-xs font-bold transition border border-silver-300">
+          <i class="fa-solid fa-gift text-amber-600"></i>
+          <span>Kutu Yap (%20 İndirim)</span>
+        </button>
+
+        <button onclick="openSizeGuideModal()" class="hidden sm:flex items-center gap-1.5 text-xs text-slate-600 hover:text-black font-semibold transition" title="Kalıp ve Beden Kılavuzu">
+          <i class="fa-solid fa-ruler-horizontal text-xs"></i>
+          <span>Beden Rehberi</span>
         </button>
 
         <button onclick="openFavoritesModal()" class="p-2 text-slate-700 hover:text-black transition relative" title="Favoriler">
@@ -133,18 +136,16 @@
 
     <!-- Koleksiyon Sekmeleri -->
     <div class="border-t border-silver-100 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-start sm:justify-center gap-2 py-3 overflow-x-auto whitespace-nowrap" id="categoryNav">
-        <!-- Dinamik Butonlar -->
-      </div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-start sm:justify-center gap-2 py-3 overflow-x-auto whitespace-nowrap" id="categoryNav"></div>
     </div>
   </header>
 
-  <!-- 3. ANA VİTRİN: BÜYÜK GÖRSEL ODAKLI ÜRÜN KARTLARI (4:5 PORTRE) -->
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-1 w-full">
+  <!-- 3. DOĞRUDAN ANA VİTRİN -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
     
     <div class="flex items-end justify-between mb-8 pb-4 border-b border-silver-200">
       <div>
-        <span class="text-[10px] uppercase font-bold tracking-[0.2em] text-silver-400">Özel Seri Dokuma</span>
+        <span class="text-[10px] uppercase font-bold tracking-[0.2em] text-silver-400">Tekil Modeller & Koleksiyon</span>
         <h1 id="currentCategoryTitle" class="text-2xl sm:text-3xl font-serif font-bold text-slate-900 tracking-wide mt-1">Koleksiyonun Tümü</h1>
       </div>
 
@@ -168,7 +169,7 @@
         <i class="fa-solid fa-socks"></i>
       </div>
       <h3 class="text-base font-serif font-bold text-slate-900">Aradığınız kriterde ürün bulunamadı</h3>
-      <p class="text-xs text-silver-500 mt-1">Lütfen farklı bir kumaş tipi veya model aramayı deneyin.</p>
+      <p class="text-xs text-silver-500 mt-1">Lütfen farklı bir kumaş tipi aramayı deneyin.</p>
       <button onclick="resetFilters()" class="mt-5 px-5 py-2.5 bg-slate-900 text-white text-xs font-semibold rounded-full hover:bg-slate-800 transition tracking-wider uppercase">
         Tüm Kataloğu Gör
       </button>
@@ -176,7 +177,63 @@
 
   </main>
 
-  <!-- 4. GÜVEN & HİZMET ROZETLERİ (Footer Öncesi) -->
+  <!-- 4. KUTU OLUŞTURMA BÖLÜMÜ -->
+  <section id="customBoxSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div class="silver-gradient-border bg-gradient-to-br from-white via-silver-50 to-silver-100 rounded-3xl p-6 sm:p-8 shadow-sm">
+      <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 pb-6 border-b border-silver-200">
+        <div>
+          <span class="silver-badge text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-full">Kişiselleştirilmiş Hediye Kutusu</span>
+          <h2 class="text-xl sm:text-2xl font-serif font-bold text-slate-900 mt-2">Kendi Çorap Kutunu Tasarla</h2>
+          <p class="text-xs text-slate-600 mt-1 max-w-xl">
+            Modellerin üzerindeki <b class="text-slate-900">+ Kutu</b> butonlarına basarak kutunuzu doldurun; <b class="text-slate-900 font-semibold">%20 Sepet İndirimi</b> otomatik uygulansın.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+          <div class="flex gap-2 bg-white p-1 rounded-xl border border-silver-300 w-full sm:w-auto justify-center">
+            <button onclick="setBoxTarget(3)" id="btnBox3" class="px-4 py-1.5 text-xs font-bold rounded-lg transition bg-slate-900 text-white">3'lü Kutu</button>
+            <button onclick="setBoxTarget(5)" id="btnBox5" class="px-4 py-1.5 text-xs font-bold rounded-lg transition text-slate-600 hover:text-slate-900">5'li Kutu</button>
+          </div>
+
+          <div class="w-full sm:w-48 bg-white p-3 rounded-xl border border-silver-300">
+            <div class="flex justify-between text-xs font-bold text-slate-800 mb-1">
+              <span>Kutu Doluluğu</span>
+              <span id="boxCountLabel">0 / 3</span>
+            </div>
+            <div class="w-full bg-silver-200 h-2 rounded-full overflow-hidden">
+              <div id="boxProgressBar" class="bg-slate-900 h-full transition-all duration-300" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <button id="addBoxToCartBtn" onclick="addCustomBoxToCart()" disabled class="w-full sm:w-auto px-5 py-3 rounded-xl bg-silver-300 text-slate-500 font-bold text-xs uppercase tracking-wider transition cursor-not-allowed">
+            Kutuyu Sepete Ekle
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <div class="flex items-center justify-between mb-3">
+          <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Kutunuzdaki Parçalar:</span>
+          <span class="text-[11px] text-silver-500 italic">Ürün kartlarındaki "+ Kutu" butonundan ekleyebilirsiniz</span>
+        </div>
+        <div id="boxSlotsContainer" class="grid grid-cols-3 sm:grid-cols-5 gap-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAĞ ALTTA SABİT YÜZEN KUTU ÇUBUĞU -->
+  <div id="floatingBoxPill" class="fixed bottom-6 right-6 z-30 bg-slate-900 text-white p-3 rounded-2xl shadow-2xl border border-silver-400 flex items-center gap-3 transition-all transform hover:scale-105 cursor-pointer" onclick="scrollToBoxCreator()">
+    <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-amber-400">
+      <i class="fa-solid fa-gift"></i>
+    </div>
+    <div class="text-left pr-2">
+      <div class="text-[10px] font-semibold text-silver-300 uppercase tracking-wider">Özel Kutun</div>
+      <div class="text-xs font-bold"><span id="floatingBoxCount">0</span> / <span id="floatingBoxTarget">3</span> Çorap Eklendi</div>
+    </div>
+    <span class="text-[11px] font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">%20 İndirim</span>
+  </div>
+
+  <!-- 5. GÜVEN ROZETLERİ -->
   <section class="border-t border-silver-200 bg-white py-12 px-4 sm:px-6">
     <div class="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
       <div class="p-3">
@@ -213,126 +270,198 @@
     </div>
   </section>
 
-  <!-- 5. KAPSAMLI KURUMSAL & İLETİŞİM FOOTER ALANI -->
+  <!-- 6. FOOTER -->
   <footer class="bg-slate-950 text-slate-400 border-t border-slate-800 text-xs pt-16 pb-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <!-- Ana Grid Bölümü -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-850">
-        
-        <!-- Kolon 1: Marka Tanıtımı & Bülten (2 Birim) -->
         <div class="lg:col-span-2 pr-0 lg:pr-8">
-          <span class="font-serif text-2xl font-bold tracking-[0.25em] text-white">ARGENT</span>
+          <span class="font-serif text-2xl font-bold tracking-[0.25em] text-white">TOOPUK</span>
           <p class="text-xs text-slate-400 mt-3 leading-relaxed max-w-sm">
-            Argent Atelier; uzun elyaflı doğal bambu ve merinos ipliklerini dikişsiz parmak ucu teknolojisiyle buluşturan yeni nesil çorap markasıdır. Her adımda kusursuz konfor ve şıklık sunar.
+            Toopuk Atelier; uzun elyaflı doğal bambu ve merinos ipliklerini dikişsiz parmak ucu teknolojisiyle buluşturan yeni nesil çorap markasıdır.
           </p>
-
-          <!-- E-Bülten Kaydı -->
           <div class="mt-5">
             <span class="text-[11px] font-semibold text-slate-300 block mb-2 uppercase tracking-wider">Koleksiyon Bültenine Katılın</span>
             <form onsubmit="handleNewsletter(event)" class="flex gap-2 max-w-sm">
-              <input 
-                type="email" 
-                id="footerEmail" 
-                required 
-                placeholder="E-posta adresiniz..." 
-                class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-silver-400"
-              >
-              <button type="submit" class="px-4 py-2 bg-white text-slate-950 font-bold rounded-lg text-xs hover:bg-slate-200 transition">
-                Kayıt
-              </button>
+              <input type="email" id="footerEmail" required placeholder="E-posta adresiniz..." class="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-silver-400">
+              <button type="submit" class="px-4 py-2 bg-white text-slate-950 font-bold rounded-lg text-xs hover:bg-slate-200 transition">Kayıt</button>
             </form>
-            <div id="newsletterNotice" class="hidden text-emerald-400 text-[11px] mt-2 font-medium">✨ %15 Hoş geldin kodunuz: ARGENT15</div>
+            <div id="newsletterNotice" class="hidden text-emerald-400 text-[11px] mt-2 font-medium">✨ %15 Hoş geldin kodunuz: TOOPUK15</div>
           </div>
         </div>
 
-        <!-- Kolon 2: Müşteri Deneyimi & İade -->
         <div>
           <h4 class="text-white font-serif font-bold text-xs uppercase tracking-widest mb-4">Müşteri Hizmetleri</h4>
           <ul class="space-y-2.5 text-slate-400">
             <li><a href="javascript:void(0)" onclick="openInfoModal('return')" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-[10px] text-slate-600"></i> Kolay İade & Değişim</a></li>
             <li><a href="javascript:void(0)" onclick="openInfoModal('shipping')" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-[10px] text-slate-600"></i> Teslimat & Kargo Takibi</a></li>
+            <li><a href="javascript:void(0)" onclick="openSizeGuideModal()" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-[10px] text-slate-600"></i> Beden & Kalıp Rehberi</a></li>
             <li><a href="javascript:void(0)" onclick="openInfoModal('care')" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-[10px] text-slate-600"></i> Çorap Yıkama & Bakım</a></li>
             <li><a href="javascript:void(0)" onclick="openInfoModal('faq')" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-[10px] text-slate-600"></i> Sıkça Sorulan Sorular</a></li>
           </ul>
         </div>
 
-        <!-- Kolon 3: Yasal & Sözleşmeler -->
         <div>
           <h4 class="text-white font-serif font-bold text-xs uppercase tracking-widest mb-4">Yasal & Kurumsal</h4>
           <ul class="space-y-2.5 text-slate-400">
             <li><a href="javascript:void(0)" onclick="openInfoModal('sales')" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-[10px] text-slate-600"></i> Mesafeli Satış Sözleşmesi</a></li>
             <li><a href="javascript:void(0)" onclick="openInfoModal('kvkk')" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-[10px] text-slate-600"></i> KVKK & Gizlilik Politikası</a></li>
-            <li><a href="javascript:void(0)" onclick="openInfoModal('cookies')" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-[10px] text-slate-600"></i> Çerez Tercihleri</a></li>
             <li><a href="javascript:void(0)" onclick="openInfoModal('company')" class="hover:text-white transition flex items-center gap-1.5"><i class="fa-solid fa-angle-right text-[10px] text-slate-600"></i> Şirket Künyesi</a></li>
           </ul>
         </div>
 
-        <!-- Kolon 4: Doğrudan İletişim Kanalları -->
         <div>
           <h4 class="text-white font-serif font-bold text-xs uppercase tracking-widest mb-4">İletişim & Ofis</h4>
           <ul class="space-y-3 text-slate-400">
-            <li class="flex items-start gap-2.5">
-              <i class="fa-solid fa-location-dot mt-0.5 text-silver-400"></i>
-              <span class="leading-relaxed">Levent Mah. Cömert Sok. No: 4/1 Beşiktaş, İstanbul</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <i class="fa-solid fa-phone text-silver-400"></i>
-              <a href="tel:08503080000" class="hover:text-white transition">0850 308 00 00</a>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <i class="fa-solid fa-envelope text-silver-400"></i>
-              <a href="mailto:destek@argent.com.tr" class="hover:text-white transition">destek@argent.com.tr</a>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <i class="fa-brands fa-whatsapp text-emerald-400"></i>
-              <a href="https://wa.me/905000000000" target="_blank" class="text-emerald-400 hover:text-emerald-300 transition font-semibold">WhatsApp Canlı Destek</a>
-            </li>
+            <li class="flex items-start gap-2.5"><i class="fa-solid fa-location-dot mt-0.5 text-silver-400"></i><span class="leading-relaxed">Levent Mah. Cömert Sok. No: 4/1 Beşiktaş, İstanbul</span></li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-phone text-silver-400"></i><a href="tel:08503080000" class="hover:text-white transition">0850 308 00 00</a></li>
+            <li class="flex items-center gap-2.5"><i class="fa-solid fa-envelope text-silver-400"></i><a href="mailto:destek@toopuk.com" class="hover:text-white transition">destek@toopuk.com</a></li>
+            <li class="flex items-center gap-2.5"><i class="fa-brands fa-whatsapp text-emerald-400"></i><a href="https://wa.me/905000000000" target="_blank" class="text-emerald-400 hover:text-emerald-300 transition font-semibold">WhatsApp Canlı Destek</a></li>
           </ul>
         </div>
-
       </div>
 
-      <!-- Alt Telif & Güvenlik Bandı -->
       <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
-        <div>
-          <p>© 2026 ARGENT TEKSTİL VE TİCARET A.Ş. Tüm hakları saklıdır.</p>
-        </div>
-
-        <!-- Ödeme Kartları & Güvenlik Simgeleri -->
+        <p>© 2026 TOOPUK TEKSTİL VE TİCARET A.Ş. Tüm hakları saklıdır.</p>
         <div class="flex items-center gap-4 text-slate-400 text-lg">
           <i class="fa-brands fa-cc-visa" title="Visa"></i>
           <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
-          <i class="fa-solid fa-credit-card text-sm" title="Troy Destekli"></i>
+          <i class="fa-solid fa-credit-card text-sm" title="Troy"></i>
           <span class="text-[11px] text-slate-500 border-l border-slate-700 pl-3">iyzico altyapısıyla güvenli tahsilat</span>
         </div>
       </div>
-
     </div>
   </footer>
 
   <!-- ==================== MODALLAR ==================== -->
 
-  <!-- A. DETAY & YORUM MODALI -->
-  <div id="productModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-    <div class="bg-white w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden relative my-auto border border-silver-200">
-      <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-silver-100 hover:bg-silver-200 flex items-center justify-center text-slate-700 transition">
+  <!-- KUTU İÇERİĞİ VE İÇ-DETAY MODALI -->
+  <div id="boxDetailModal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6 relative border border-silver-200 my-auto">
+      
+      <button onclick="handleBoxModalClose()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-silver-100 hover:bg-silver-200 flex items-center justify-center text-slate-600 transition">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <!-- GÖRÜNÜM 1: KUTUDAKİ ÇORAPLARIN LİSTESİ VE FİYAT TABLOSU -->
+      <div id="boxListView">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-full bg-silver-100 flex items-center justify-center text-slate-900 text-lg">
+            <i class="fa-solid fa-gift"></i>
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-base text-slate-900" id="boxDetailModalTitle">Özel Kutu İçeriği</h3>
+            <span class="text-[11px] text-silver-500" id="boxDetailModalSubtitle">Kutunuza eklediğiniz modeller (İncelemek için tıklayın)</span>
+          </div>
+        </div>
+
+        <div id="boxPriceBanner" class="mb-4 p-3 bg-gradient-to-r from-silver-50 to-silver-100 rounded-xl border border-silver-300 flex items-center justify-between">
+          <div>
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">Kutu Özel Fiyatı</span>
+            <div class="flex items-baseline gap-2 mt-0.5">
+              <span id="boxOriginalPrice" class="text-xs text-slate-400 line-through font-semibold">0.00 ₺</span>
+              <span id="boxDiscountedPrice" class="text-base sm:text-lg font-black text-slate-900">0.00 ₺</span>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="text-[10px] font-extrabold text-emerald-700 bg-emerald-100/80 border border-emerald-300 px-2 py-0.5 rounded-full inline-block">
+              %20 Kutu İndirimi
+            </span>
+            <span id="boxSavingsAmount" class="block text-[10px] text-emerald-600 font-semibold mt-0.5">0 ₺ tasarruf</span>
+          </div>
+        </div>
+
+        <div id="boxDetailModalList" class="space-y-3 max-h-72 overflow-y-auto pr-1"></div>
+
+        <div class="mt-6 pt-4 border-t border-silver-100 flex justify-between items-center">
+          <div class="text-left">
+            <span class="text-[10px] text-silver-500 block">Toplam Tutar:</span>
+            <span id="boxFooterPrice" class="text-sm font-bold text-slate-900">0 ₺</span>
+          </div>
+          <button onclick="closeBoxDetailModal()" class="px-5 py-2 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-800 transition">
+            Tamam
+          </button>
+        </div>
+      </div>
+
+      <!-- GÖRÜNÜM 2: KUTU İÇİNDEN SEÇİLEN ÇORABIN DETAYI (İÇ MODAL) -->
+      <div id="boxSubItemDetailView" class="hidden">
+        <div class="flex items-center justify-between pb-3 mb-4 border-b border-silver-200">
+          <button onclick="returnToBoxList()" class="text-xs font-bold text-slate-800 hover:text-black flex items-center gap-1.5 bg-silver-100 px-3 py-1.5 rounded-lg border border-silver-300 transition">
+            <i class="fa-solid fa-arrow-left"></i> Kutu Listesine Geri Dön
+          </button>
+          <span class="text-[11px] text-silver-500 font-semibold">Kutu İçi Parça Detayı</span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 items-center sm:items-start">
+          <img id="boxSubItemImg" src="" class="w-32 h-40 object-cover rounded-xl border border-silver-300 shadow-sm">
+          <div class="flex-1 text-left">
+            <span id="boxSubItemCat" class="silver-badge text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">Kategori</span>
+            <h4 id="boxSubItemTitle" class="text-base font-serif font-bold text-slate-900 mt-1">Model Adı</h4>
+            <div id="boxSubItemPrice" class="text-sm font-extrabold text-slate-900 mt-1">0 ₺</div>
+            <p id="boxSubItemDesc" class="text-xs text-slate-600 mt-2 leading-relaxed">Açıklama</p>
+            <div class="mt-3 p-2 bg-silver-50 rounded-lg border border-silver-200 text-[11px] text-slate-700">
+              <span>Seçili Beden: </span><b id="boxSubItemSize" class="text-slate-900">36-40</b>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-silver-100 flex justify-end">
+          <button onclick="returnToBoxList()" class="px-5 py-2 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-800 transition">
+            Listeye Dön
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- STANDART ÜRÜN DETAY MODALI: GELİŞMİŞ GÖRSEL SLIDER & THUMBNAIL GALERİSİ -->
+  <div id="productModal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
+    <div class="bg-white w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden relative my-auto border border-silver-200">
+      
+      <button onclick="closeProductModal()" class="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-white/90 hover:bg-white shadow-md flex items-center justify-center text-slate-700 transition" title="Kapat">
         <i class="fa-solid fa-xmark text-sm"></i>
       </button>
 
       <div class="grid grid-cols-1 md:grid-cols-2">
-        <div class="bg-silver-50 p-8 flex items-center justify-center border-b md:border-b-0 md:border-r border-silver-200">
-          <img id="modalImg" src="" alt="Ürün" class="max-h-80 w-full object-cover rounded-xl shadow-md border border-silver-200">
+        
+        <!-- SOL SÜTUN: GÖRSEL SLIDER VE THUMBNAIL ÖNİZLEMELERİ -->
+        <div class="bg-silver-50 p-6 flex flex-col justify-between border-b md:border-b-0 md:border-r border-silver-200">
+          
+          <!-- Slider Alanı -->
+          <div class="relative w-full aspect-[4/5] bg-white rounded-2xl overflow-hidden border border-silver-200 shadow-sm flex items-center justify-center group/slider">
+            <img id="modalSliderMainImg" src="" alt="Ürün" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+            
+            <!-- Önceki / Sonraki Butonları -->
+            <button onclick="prevSliderImage()" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-slate-800 shadow-md flex items-center justify-center text-xs transition opacity-0 group-hover/slider:opacity-100" title="Önceki Görsel">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <button onclick="nextSliderImage()" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-slate-800 shadow-md flex items-center justify-center text-xs transition opacity-0 group-hover/slider:opacity-100" title="Sonraki Görsel">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            <!-- Görsel Sayacı (Hap Rozet) -->
+            <div class="absolute bottom-3 right-3 bg-slate-900/80 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
+              <i class="fa-regular fa-image text-[9px]"></i>
+              <span id="modalSliderCounter">1 / 1</span>
+            </div>
+          </div>
+
+          <!-- Küçük Önizlemeler (Thumbnails) -->
+          <div id="modalThumbnailsContainer" class="flex items-center gap-2 mt-4 overflow-x-auto py-1"></div>
         </div>
 
+        <!-- SAĞ SÜTUN: ÜRÜN BİLGİLERİ, BEDEN VE AKSİYONLAR -->
         <div class="p-6 sm:p-8 flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between mb-2">
               <span id="modalCat" class="silver-badge text-[10px] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-full">Koleksiyon</span>
-              <div class="flex items-center text-amber-500 text-xs" id="modalStars"></div>
+              <span id="modalStockBadge" class="text-[10px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md flex items-center gap-1">
+                <i class="fa-solid fa-fire text-amber-500"></i> Son 6 Çift Kaldı
+              </span>
             </div>
 
-            <h2 id="modalTitle" class="text-xl sm:text-2xl font-serif font-bold text-slate-900">Model Adı</h2>
+            <h2 id="modalTitle" class="text-xl sm:text-2xl font-serif font-bold text-slate-900 leading-snug">Model Adı</h2>
             
             <div class="mt-3 flex items-baseline gap-3">
               <span id="modalPrice" class="text-2xl font-extrabold text-slate-900 font-sans">0 ₺</span>
@@ -341,8 +470,13 @@
 
             <p id="modalDesc" class="mt-4 text-xs text-slate-600 leading-relaxed font-normal">Açıklama alanı...</p>
 
-            <div class="mt-6">
-              <label class="block text-xs font-bold text-slate-800 tracking-wider uppercase mb-2">Beden Seçimi</label>
+            <div class="mt-5">
+              <div class="flex items-center justify-between mb-2">
+                <label class="block text-xs font-bold text-slate-800 tracking-wider uppercase">Beden Seçimi</label>
+                <button onclick="openSizeGuideModal()" class="text-[11px] text-slate-500 hover:text-black underline flex items-center gap-1">
+                  <i class="fa-solid fa-ruler"></i> Beden Tablosu
+                </button>
+              </div>
               <div class="flex gap-3">
                 <button type="button" onclick="selectSize('36-40', this)" class="size-btn px-4 py-2 text-xs font-bold rounded-lg border border-slate-900 bg-slate-900 text-white">36-40</button>
                 <button type="button" onclick="selectSize('41-44', this)" class="size-btn px-4 py-2 text-xs font-bold rounded-lg border border-silver-300 text-slate-700 hover:border-slate-900">41-44</button>
@@ -350,29 +484,112 @@
             </div>
           </div>
 
-          <div class="mt-8 pt-4 border-t border-silver-100 flex items-center gap-3">
+          <div class="mt-6 pt-4 border-t border-silver-100 flex items-center gap-3">
             <button onclick="addCurrentModalToCart()" class="flex-1 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-xs uppercase tracking-widest font-bold rounded-xl transition flex items-center justify-center gap-3 shadow-lg">
               <i class="fa-solid fa-bag-shopping"></i> Sepete İlave Et
+            </button>
+            <button onclick="addModalItemToBox()" class="px-4 py-3.5 bg-silver-100 hover:bg-silver-200 text-slate-800 text-xs font-bold rounded-xl transition border border-silver-300" title="Özel Kutuya Ekle">
+              + Kutuya Ekle
             </button>
           </div>
         </div>
       </div>
 
+      <!-- Fotoğraflı Müşteri Değerlendirmeleri Bölümü -->
       <div class="border-t border-silver-200 p-6 bg-silver-50">
-        <h4 class="text-xs font-serif font-bold text-slate-900 uppercase tracking-widest mb-3">Müşteri Yorumları & Tecrübeleri</h4>
-        <div id="modalReviewsList" class="space-y-2 max-h-36 overflow-y-auto pr-1"></div>
+        <h4 class="text-xs font-serif font-bold text-slate-900 uppercase tracking-widest mb-3">Fotoğraflı Müşteri Değerlendirmeleri</h4>
+        <div id="modalReviewsList" class="space-y-3 max-h-40 overflow-y-auto pr-1"></div>
 
-        <form onsubmit="submitReview(event)" class="mt-4 pt-3 border-t border-silver-200 flex gap-2">
-          <input type="text" id="reviewComment" required placeholder="Görüşünüzü paylaşın..." class="flex-1 text-xs px-3 py-2 bg-white border border-silver-300 rounded-lg focus:outline-none focus:border-slate-800">
-          <button type="submit" class="px-4 py-2 bg-slate-800 text-white text-xs font-semibold rounded-lg hover:bg-slate-900">Gönder</button>
+        <form onsubmit="submitReview(event)" class="mt-4 pt-3 border-t border-silver-200 flex flex-col sm:flex-row gap-2">
+          <input type="text" id="reviewComment" required placeholder="Bu ürünle ilgili yorumunuz..." class="flex-1 text-xs px-3 py-2 bg-white border border-silver-300 rounded-lg focus:outline-none focus:border-slate-800">
+          <button type="submit" class="px-4 py-2 bg-slate-800 text-white text-xs font-semibold rounded-lg hover:bg-slate-900 whitespace-nowrap">Yorum Gönder</button>
         </form>
       </div>
 
     </div>
   </div>
 
-  <!-- B. BİLGİLENDİRME & YASAL METİNLER & İADE MODALI -->
-  <div id="infoModal" class="fixed inset-0 z-50 hidden bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+  <!-- BEDEN VE KALIP REHBERİ MODALI -->
+  <div id="sizeGuideModal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6 sm:p-8 relative my-auto border border-silver-200">
+      <button onclick="closeSizeGuideModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-silver-100 hover:bg-silver-200 flex items-center justify-center text-slate-600 transition">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 rounded-full bg-silver-100 flex items-center justify-center text-slate-900 text-lg">
+          <i class="fa-solid fa-ruler-combined"></i>
+        </div>
+        <div>
+          <h3 class="font-serif font-bold text-lg text-slate-900">Beden & Kalıp Kılavuzu</h3>
+          <span class="text-[11px] text-silver-500">Mükemmel uyum için ayak numaranızı kontrol edin</span>
+        </div>
+      </div>
+
+      <div class="border border-silver-200 rounded-xl overflow-hidden mt-4 text-xs">
+        <table class="w-full text-left">
+          <thead class="bg-silver-100 text-slate-800 font-bold uppercase text-[10px] tracking-wider border-b border-silver-200">
+            <tr>
+              <th class="p-3">Çorap Bedeni</th>
+              <th class="p-3">Ayakkabı Numarası (EU)</th>
+              <th class="p-3">Kalıp Türü</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-silver-200 text-slate-700">
+            <tr>
+              <td class="p-3 font-bold text-slate-900">36 - 40</td>
+              <td class="p-3">36, 37, 38, 39, 40</td>
+              <td class="p-3 text-silver-600">Esnek Likra (Tam Kalıp)</td>
+            </tr>
+            <tr>
+              <td class="p-3 font-bold text-slate-900">41 - 44</td>
+              <td class="p-3">41, 42, 43, 44, 45</td>
+              <td class="p-3 text-silver-600">Geniş Topuk Desteği</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="mt-4 p-3 bg-silver-50 rounded-xl border border-silver-200 text-xs text-slate-600 space-y-1">
+        <p>💡 <b>İpucu:</b> Spor ayakkabı numaranız 40.5 ise ayağınız ince ise 36-40, taraklı ise 41-44 bedeni seçiniz.</p>
+        <p>🧵 Dikişsiz burun tasarımı sayesinde parmak uçlarında potluk yapmaz.</p>
+      </div>
+
+      <div class="mt-6 flex justify-end">
+        <button onclick="closeSizeGuideModal()" class="px-5 py-2 bg-slate-900 text-white text-xs font-bold rounded-lg hover:bg-slate-800">Kapat</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ÇIKIŞ NİYETİ (EXIT-INTENT) -->
+  <div id="exitIntentModal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 sm:p-8 text-center relative border border-silver-300">
+      <button onclick="closeExitIntentModal()" class="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-silver-100 hover:bg-silver-200 flex items-center justify-center text-slate-600 transition">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <div class="w-14 h-14 bg-silver-100 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl text-slate-900 border border-silver-200">
+        <i class="fa-solid fa-gift"></i>
+      </div>
+      <span class="text-[10px] font-bold uppercase tracking-widest text-silver-500">Ayrılmadan Önce Son Fırsat</span>
+      <h3 class="text-xl font-serif font-bold text-slate-900 mt-1">İlk Siparişinize Özel Kargo Bizden!</h3>
+      <p class="text-xs text-slate-600 mt-2 leading-relaxed">
+        Bugün vereceğiniz siparişte kargo bedavaya gelsin:
+      </p>
+
+      <div class="my-5 p-3.5 bg-silver-100 border border-dashed border-slate-400 rounded-xl flex items-center justify-between">
+        <span class="font-mono font-extrabold text-sm text-slate-900 tracking-wider">KARGOBEDAVA</span>
+        <button onclick="copyExitCoupon()" id="copyCouponBtn" class="px-3 py-1 bg-slate-900 text-white text-xs font-semibold rounded-lg hover:bg-slate-800 transition">Kopyala</button>
+      </div>
+
+      <button onclick="closeExitIntentModal(); toggleCartDrawer(true);" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition shadow-md">
+        Sepeti Aç & Siparişi Tamamla
+      </button>
+    </div>
+  </div>
+
+  <!-- BİLGİLENDİRME MODALI -->
+  <div id="infoModal" class="fixed inset-0 z-50 hidden bg-slate-950/75 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
     <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl p-6 sm:p-8 relative my-auto border border-silver-200">
       <button onclick="closeInfoModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-silver-100 hover:bg-silver-200 flex items-center justify-center text-slate-600 transition">
         <i class="fa-solid fa-xmark text-sm"></i>
@@ -384,25 +601,22 @@
         </div>
         <div>
           <h3 class="font-serif font-bold text-lg text-slate-900" id="infoModalTitle">Başlık</h3>
-          <span class="text-[11px] text-silver-500">Argent Müşteri Rehberi</span>
+          <span class="text-[11px] text-silver-500">Toopuk Müşteri Rehberi</span>
         </div>
       </div>
 
-      <div id="infoModalBody" class="text-xs text-slate-600 leading-relaxed space-y-3 max-h-96 overflow-y-auto pr-2 custom-scroll">
-        <!-- Dinamik Bilgi Yüklenecek -->
-      </div>
+      <div id="infoModalBody" class="text-xs text-slate-600 leading-relaxed space-y-3 max-h-96 overflow-y-auto pr-2"></div>
 
       <div class="mt-6 pt-4 border-t border-silver-100 flex justify-end">
-        <button onclick="closeInfoModal()" class="px-5 py-2 bg-slate-900 text-white text-xs font-semibold rounded-lg hover:bg-slate-800 transition">
-          Anladım, Kapat
-        </button>
+        <button onclick="closeInfoModal()" class="px-5 py-2 bg-slate-900 text-white text-xs font-semibold rounded-lg hover:bg-slate-800 transition">Anladım, Kapat</button>
       </div>
     </div>
   </div>
 
-  <!-- C. SEPET ÇEKMECESİ -->
-  <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs hidden transition-opacity"></div>
-  <div id="cartDrawer" class="fixed top-0 right-0 z-50 w-full sm:w-96 h-full bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 border-l border-silver-200">
+  <!-- SEPET ÇEKMECESİ -->
+  <div id="cartDrawerBackdrop" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-xs hidden transition-opacity"></div>
+  <div id="cartDrawer" class="fixed top-0 right-0 z-40 w-full sm:w-[440px] h-full bg-white shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 border-l border-silver-200">
+    
     <div class="p-5 border-b border-silver-200 flex items-center justify-between">
       <div class="flex items-center gap-2">
         <i class="fa-solid fa-bag-shopping text-slate-800"></i>
@@ -413,17 +627,61 @@
       </button>
     </div>
 
+    <!-- Katmanlı İndirim Barem -->
+    <div class="bg-silver-50 p-3.5 border-b border-silver-200 text-xs">
+      <div class="flex justify-between font-bold text-slate-800 mb-1.5" id="tierDiscountText">
+        <span>Katmanlı İndirim:</span>
+        <span class="text-amber-600">3 Ürün Alana %10 İndirim</span>
+      </div>
+      <div class="w-full bg-silver-200 h-1.5 rounded-full overflow-hidden">
+        <div id="tierProgressBar" class="bg-slate-900 h-full transition-all duration-300" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Sepet Ürünleri Listesi -->
     <div id="cartItemsList" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
 
+    <!-- Sepet İçi Upsell -->
+    <div class="px-5 py-3 bg-silver-100/70 border-t border-b border-silver-200">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <img src="https://images.unsplash.com/photo-1582966773950-8b1b06385d3f?auto=format&fit=crop&w=150&q=80" class="w-10 h-10 object-cover rounded-lg border border-silver-300 cursor-pointer" onclick="openProductModalFromCart(5)">
+          <div>
+            <span class="text-[10px] font-bold text-slate-500 uppercase block">Fırsat Ürünü</span>
+            <h5 class="text-xs font-bold text-slate-900 truncate w-36 hover:underline cursor-pointer" onclick="openProductModalFromCart(5)">Görünmez Babet Çorap</h5>
+          </div>
+        </div>
+        <button onclick="addUpsellProduct()" class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-bold rounded-lg transition whitespace-nowrap shadow-xs">
+          + 65 ₺ Ekle
+        </button>
+      </div>
+    </div>
+
+    <!-- Hediye Notu -->
+    <div class="px-5 py-3 border-b border-silver-200 bg-white text-xs">
+      <label class="flex items-center gap-2 cursor-pointer font-semibold text-slate-800">
+        <input type="checkbox" id="giftCheckbox" onchange="toggleGiftNote(this.checked)" class="rounded text-slate-900 focus:ring-0">
+        <span>🎁 Bu siparişe Özel Hediye Notu Ekle (Ücretsiz)</span>
+      </label>
+      <div id="giftNoteContainer" class="hidden mt-2">
+        <textarea id="giftNoteText" rows="2" placeholder="Hediye kartına yazılacak özel mesajınız..." class="w-full p-2 bg-silver-50 border border-silver-200 rounded-lg text-xs focus:outline-none focus:border-slate-800"></textarea>
+      </div>
+    </div>
+
+    <!-- Toplam & Ödeme -->
     <div class="p-5 border-t border-silver-200 bg-silver-50 space-y-3">
-      <div class="text-xs space-y-2 text-slate-600">
+      <div class="text-xs space-y-1.5 text-slate-600">
         <div class="flex justify-between">
           <span>Ara Toplam</span>
           <span id="cartSubtotal" class="font-bold text-slate-900">0.00 ₺</span>
         </div>
+        <div class="flex justify-between text-emerald-700 font-semibold" id="cartDiscountRow" style="display: none;">
+          <span id="cartDiscountLabel">Otomatik İndirim</span>
+          <span id="cartDiscountAmount">-0.00 ₺</span>
+        </div>
         <div class="flex justify-between">
           <span>Kargo</span>
-          <span class="font-semibold text-emerald-700">Ücretsiz (Gümüş Kutu)</span>
+          <span id="cartShippingText" class="font-semibold text-emerald-700">Ücretsiz (Gümüş Kutu)</span>
         </div>
         <div class="flex justify-between text-base font-bold text-slate-900 pt-2 border-t border-silver-200">
           <span>Genel Tutar</span>
@@ -431,14 +689,22 @@
         </div>
       </div>
 
-      <button onclick="completeCheckout()" class="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-xs uppercase tracking-widest font-bold rounded-xl transition flex items-center justify-center gap-2 shadow-md">
-        <span>Ödemeye Geç</span>
-        <i class="fa-solid fa-arrow-right text-xs"></i>
-      </button>
+      <div class="space-y-2 pt-1">
+        <button onclick="completeCheckout()" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white text-xs uppercase tracking-widest font-bold rounded-xl transition flex items-center justify-center gap-2 shadow-md">
+          <span>Güvenli Ödemeye Geç</span>
+          <i class="fa-solid fa-arrow-right text-xs"></i>
+        </button>
+
+        <button onclick="orderViaWhatsApp()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition flex items-center justify-center gap-2 shadow-xs">
+          <i class="fa-brands fa-whatsapp text-sm"></i>
+          <span>WhatsApp ile Siparişi Tamamla</span>
+        </button>
+      </div>
     </div>
+
   </div>
 
-  <!-- JAVASCRIPT: ÜRÜN & FOOTER MODAL MOTORU -->
+  <!-- JAVASCRIPT: E-TİCARET MOTORU -->
   <script>
     const PRODUCTS = [
       {
@@ -451,9 +717,18 @@
         oldPrice: 145,
         rating: 4.9,
         reviewsCount: 84,
+        stock: 5,
         image: "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&w=800&q=85",
+        images: [
+          "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=800&q=85"
+        ],
         description: "İpeksi hafiflikte doğal bambu elyafları ayağınızı serin tutar. Özel ribana örgüsü bacağı sıkmadan kavrar.",
-        reviews: [{ user: "Hakan T.", rating: 5, comment: "Kumaşı gerçekten çok lüks, ayakta hiç terleme yapmıyor." }]
+        reviews: [
+          { user: "Hakan T.", rating: 5, comment: "Kumaşı gerçekten çok lüks, ayakta hiç terleme yapmıyor.", photo: "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&w=200&q=80" },
+          { user: "Elif S.", rating: 5, comment: "Dikişsiz burun tasarımı tam aradığım gibi, topuktan vurmuyor." }
+        ]
       },
       {
         id: 2,
@@ -465,9 +740,17 @@
         oldPrice: 220,
         rating: 5.0,
         reviewsCount: 52,
+        stock: 3,
         image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=85",
+        images: [
+          "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&w=800&q=85"
+        ],
         description: "Gümüş gri tonlarında çift kat örgü. Kış aylarında bot içinde ekstra yastıklama ve termal yalıtım sağlar.",
-        reviews: [{ user: "Serdar M.", rating: 5, comment: "Kalınlığı ve kalitesi fotoğraftakinden bile daha iyi." }]
+        reviews: [
+          { user: "Serdar M.", rating: 5, comment: "Kalınlığı ve kalitesi fotoğraftakinden bile daha iyi.", photo: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=200&q=80" }
+        ]
       },
       {
         id: 3,
@@ -479,9 +762,17 @@
         oldPrice: 125,
         rating: 4.8,
         reviewsCount: 116,
+        stock: 8,
         image: "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=85",
+        images: [
+          "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1582966773950-8b1b06385d3f?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?auto=format&fit=crop&w=800&q=85"
+        ],
         description: "Topuk ve burun altı darbe emici havlu dokuma. Ayak kemerini saran elastik bandaj desteği.",
-        reviews: [{ user: "Kerem A.", rating: 5, comment: "Sneaker ile kullanıyorum, gün boyu kayma yapmıyor." }]
+        reviews: [
+          { user: "Kerem A.", rating: 5, comment: "Sneaker ile kullanıyorum, gün boyu kayma yapmıyor." }
+        ]
       },
       {
         id: 4,
@@ -493,9 +784,17 @@
         oldPrice: 160,
         rating: 4.7,
         reviewsCount: 43,
+        stock: 4,
         image: "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?auto=format&fit=crop&w=800&q=85",
+        images: [
+          "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=85"
+        ],
         description: "Takım elbise ve klasik ayakkabılara derinlik katan zarif gümüş ve füme geometrik desenler.",
-        reviews: [{ user: "Levent E.", rating: 5, comment: "Ofiste takım elbise altına giyiyorum, çok asil duruyor." }]
+        reviews: [
+          { user: "Levent E.", rating: 5, comment: "Ofiste takım elbise altına giyiyorum, çok asil duruyor." }
+        ]
       },
       {
         id: 5,
@@ -507,9 +806,16 @@
         oldPrice: 110,
         rating: 4.9,
         reviewsCount: 78,
+        stock: 12,
         image: "https://images.unsplash.com/photo-1582966773950-8b1b06385d3f?auto=format&fit=crop&w=800&q=85",
+        images: [
+          "https://images.unsplash.com/photo-1582966773950-8b1b06385d3f?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=85"
+        ],
         description: "Loafer ve babet ayakkabılar için dışarıdan asla görünmeyen, topuktan düşmeyen silikon kavrama.",
-        reviews: [{ user: "Zeynep B.", rating: 5, comment: "Topuktan kayıp ayağın altına toplanmıyor, harika!" }]
+        reviews: [
+          { user: "Zeynep B.", rating: 5, comment: "Kaçıncı babet çorabım ilk defa ayaktan çıkmayan bir model buldum." }
+        ]
       },
       {
         id: 6,
@@ -521,124 +827,67 @@
         oldPrice: 650,
         rating: 5.0,
         reviewsCount: 160,
+        stock: 6,
         image: "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=800&q=85",
+        images: [
+          "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1586350977771-b3b0abd50c82?auto=format&fit=crop&w=800&q=85",
+          "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=85"
+        ],
         description: "Siyah, antrasit, gümüş gri, füme ve lacivert tonlarında 5'li lüks sert hediye kutulu set.",
-        reviews: [{ user: "Murat C.", rating: 5, comment: "Kutusu çok prestijli, hediye olarak aldım bayıldılar." }]
+        reviews: [
+          { user: "Murat C.", rating: 5, comment: "Kutusu çok prestijli, hediye olarak aldım bayıldılar." }
+        ]
       }
     ];
 
     const CATEGORIES = [
       { id: "all", name: "Tüm Koleksiyon" },
+      { id: "box_creator", name: "🎁 Kendi Kutunu Yap (%20 İndirim)" },
       { id: "bambu", name: "Doğal Bambu" },
       { id: "termal", name: "Kaşmir & Yün" },
       { id: "spor", name: "Performans Spor" },
       { id: "desenli", name: "Jakar Seri" },
       { id: "babet", name: "Görünmez Babet" },
-      { id: "kutu", name: "Hediye Kutuları" }
+      { id: "kutu", name: "Hazır Paketler" }
     ];
 
-    // Footer Bilgi İçerikleri Veritabanı
     const INFO_CONTENTS = {
       return: {
         title: "Kolay İade & Değişim Süreci",
         icon: "fa-solid fa-arrows-rotate",
-        body: `
-          <div class="p-3 bg-silver-100 rounded-lg border border-silver-200 text-slate-800 font-semibold mb-3">
-            📌 İade Kargo Anlaşma Kodumuz: <b class="text-slate-950 font-mono tracking-wider">948 221 445</b> (Yurtiçi Kargo)
-          </div>
-          <p><b>14 Gün İçinde Koşulsuz İade:</b> Tüketici Hakları Kanunu gereğince teslim tarihinden itibaren 14 gün içinde ürünlerinizi iade edebilirsiniz.</p>
-          <p><b>Hijyen Kuralı:</b> Çorap ürünlerinde hijyen bandı/mührü açılmamış, denenmemiş ve orijinal kutusu bozulmamış ürünlerin iadesi kabul edilmektedir.</p>
-          <p><b>İade Adımları:</b></p>
-          <ol class="list-decimal pl-4 space-y-1">
-            <li>Ürünleri orijinal gümüş ambalajına koyun.</li>
-            <li>En yakın Yurtiçi Kargo şubesine anlaşma kodumuzla birlikte teslim edin (Kargo ücreti tarafımıza aittir).</li>
-            <li>Paket depomuza ulaştıktan sonra 2 iş günü içinde kartınıza kesintisiz para iadesi yapılır.</li>
-          </ol>
-        `
+        body: `<div class="p-3 bg-silver-100 rounded-lg border border-silver-200 text-slate-800 font-semibold mb-3">📌 İade Kargo Anlaşma Kodu: <b>948 221 445</b> (Yurtiçi Kargo)</div><p>14 gün içerisinde açılmamış ve denenmemiş ürünlerde koşulsuz iade hakkınız mevcuttur.</p>`
       },
       shipping: {
         title: "Teslimat & Kargo Politikası",
         icon: "fa-solid fa-truck-fast",
-        body: `
-          <p><b>Aynı Gün Sevkiyat:</b> Hafta içi saat 15:00'e kadar verilen tüm siparişler aynı gün özenle hazırlanıp kargoya teslim edilir.</p>
-          <p><b>Teslimat Süresi:</b> İstanbul, Ankara, İzmir gibi büyükşehirlere ertesi gün (24 saatte); diğer illere ortalama 1-3 iş günü içinde teslimat sağlanır.</p>
-          <p><b>Ücretsiz Kargo Barem:</b> 500 ₺ ve üzeri tüm siparişlerde kargo tamamen ücretsizdir. Altındaki siparişlerde sabit 45 ₺ kargo bedeli uygulanır.</p>
-          <p>Kargonuz çıktığında SMS ve e-posta ile canlı takip bağlantısı iletilir.</p>
-        `
+        body: `<p>Saat 15:00'e kadar verilen siparişler aynı gün kargoya verilir. 500 ₺ üzeri kargo ücretsizdir.</p>`
       },
       care: {
         title: "Çorap Bakım & Yıkama Kılavuzu",
         icon: "fa-solid fa-soap",
-        body: `
-          <p>Argent çoraplarının uzun ömürlü olması ve doğal lif dokusunu kaybetmemesi için önerilerimiz:</p>
-          <ul class="list-disc pl-4 space-y-1.5">
-            <li><b>Yıkama Sıcaklığı:</b> Maksimum 30°C'de ve tersten yıkayınız.</li>
-            <li><b>Deterjan:</b> Çamaşır suyu ve ağır kimyasal ağartıcılar kullanmayınız; sıvı narin deterjan tercih ediniz.</li>
-            <li><b>Kurutma:</b> Kurutma makinesine atmayınız. Doğal ortamda sererek kurutmak çorabın elastan dengesini korur.</li>
-            <li><b>Ütüleme:</b> Çoraplar ütü gerektirmez. Yüksek ısı lifleri deforme eder.</li>
-          </ul>
-        `
+        body: `<p>Maksimum 30°C'de yıkayınız, kurutma makinesine atmayınız ve doğal kurutma yapınız.</p>`
       },
       faq: {
         title: "Sıkça Sorulan Sorular",
         icon: "fa-solid fa-circle-question",
-        body: `
-          <p><b>S: Çorapların burnu gerçekten dikişsiz mi?</b><br>C: Evet, Rosso dikiş yerine el işçiliği parmak ucu bağlama tekniği uygulanır, ayakkabı içinde baskı hissettirmez.</p>
-          <p><b>S: Ayakta terleme ve koku yapar mı?</b><br>C: Doğal bambu lifleri ve Mısır pamuğu gözenekli yapısıyla ter oluşumunu engeller, antibakteriyeldir.</p>
-          <p><b>S: Hangi bedeni seçmeliyim?</b><br>C: Kalıplarımız tam standarttır. Spor ayakkabı numaranız 40 ve altıysa 36-40; 41 ve üzeri ise 41-44 bedeni tercih ediniz.</p>
-        `
+        body: `<p><b>S: Burun kısmı dikişsiz mi?</b><br>C: Evet, Rosso dikiş yerine el bağlamadır, ayakta sıfır baskı yapar.</p>`
       },
       sales: {
         title: "Mesafeli Satış Sözleşmesi",
         icon: "fa-solid fa-file-contract",
-        body: `
-          <p>İşbu sözleşme 6502 sayılı Tüketicinin Korunması Hakkında Kanun ve Mesafeli Sözleşmeler Yönetmeliği'ne uygun olarak düzenlenmiştir.</p>
-          <p><b>Taraflar:</b> Alıcı (Müşteri) ve Satıcı (Argent Tekstil A.Ş.).</p>
-          <p><b>Konu:</b> Alıcının web sitesi üzerinden elektronik ortamda siparişini verdiği nitelikleri ve satış fiyatı belirtilen ürünün satışı ve teslimidir.</p>
-          <p>Alıcı, siparişi onayladığı anda sözleşme hükümlerini ve ödeme yükümlülüğünü peşinen kabul etmiş sayılır.</p>
-        `
+        body: `<p>6502 sayılı Kanun gereği mesafeli satış hükümlerine tabidir.</p>`
       },
       kvkk: {
         title: "KVKK & Gizlilik Bildirimi",
         icon: "fa-solid fa-user-shield",
-        body: `
-          <p>Kişisel verileriniz 6698 sayılı KVKK kapsamında yalnızca sipariş teslimatı, faturalandırma ve müşteri hizmetleri süreçlerini yürütmek amacıyla işlenir.</p>
-          <p>Kart bilgileriniz sunucularımızda asla saklanmaz; PCI-DSS standartlarında 256-Bit SSL şifrelemeyle doğrudan lisanslı ödeme kuruluşuna iletilir.</p>
-          <p>Verileriniz üçüncü şahıslarla reklam veya pazarlama amacıyla kesinlikle paylaşılmaz.</p>
-        `
+        body: `<p>Verileriniz yalnızca fatura ve teslimat amacıyla işlenir, 3. şahıslara aktarılmaz.</p>`
       },
       company: {
-        title: "Şirket Künyesi & Ticari Bilgiler",
+        title: "Şirket Künyesi",
         icon: "fa-solid fa-building",
-        body: `
-          <p><b>Ticari Unvan:</b> Argent Tekstil ve Perakende Ticaret Anonim Şirketi</p>
-          <p><b>Vergi Dairesi:</b> Beşiktaş Vergi Dairesi</p>
-          <p><b>Vergi Kimlik No:</b> 0810 948 221</p>
-          <p><b>Ticaret Sicil No:</b> 948210-5</p>
-          <p><b>Merkez Adres:</b> Levent Mah. Cömert Sok. No: 4/1 Beşiktaş, İstanbul</p>
-          <p><b>KEP Adresi:</b> argenttekstil@hs01.kep.tr</p>
-        `
-      },
-      contact: {
-        title: "Müşteri Destek & İletişim",
-        icon: "fa-solid fa-headset",
-        body: `
-          <p>Sorularınız veya sipariş durumunuz hakkında ekibimizle doğrudan iletişime geçebilirsiniz:</p>
-          <div class="space-y-2 mt-3">
-            <div class="p-2.5 bg-silver-100 rounded-lg flex items-center justify-between">
-              <span><b>Müşteri Hizmetleri:</b> 0850 308 00 00</span>
-              <span class="text-silver-500 text-[10px]">Hafta içi 09:00 - 18:00</span>
-            </div>
-            <div class="p-2.5 bg-silver-100 rounded-lg flex items-center justify-between">
-              <span><b>E-Posta:</b> destek@argent.com.tr</span>
-              <span class="text-silver-500 text-[10px]">24 Saat İçinde Yanıt</span>
-            </div>
-            <div class="p-2.5 bg-emerald-50 text-emerald-800 rounded-lg flex items-center justify-between border border-emerald-200">
-              <span><b>WhatsApp Hattı:</b> +90 500 000 00 00</span>
-              <a href="https://wa.me/905000000000" target="_blank" class="font-bold underline">Sohbet Başlat</a>
-            </div>
-          </div>
-        `
+        body: `<p><b>TOOPUK Tekstil ve Ticaret A.Ş.</b><br>Vergi No: 0810 948 221<br>Levent / Beşiktaş / İstanbul</p>`
       }
     };
 
@@ -650,26 +899,464 @@
     let selectedModalProduct = null;
     let selectedSize = "36-40";
 
+    // Slider State
+    let currentSliderImages = [];
+    let currentSliderIndex = 0;
+
+    let boxTarget = 3;
+    let customBoxItems = [];
+    let exitIntentTriggered = false;
+    let openedFromCart = false;
+
     window.addEventListener("DOMContentLoaded", () => {
       renderCategories();
       renderProducts();
+      renderBoxSlots();
       updateCartBadge();
     });
 
-    function renderCategories() {
-      const container = document.getElementById("categoryNav");
-      container.innerHTML = CATEGORIES.map(cat => `
+    function scrollToBoxCreator() {
+      const el = document.getElementById("customBoxSection");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+
+    // 1. Kendi Kutunu Yap Fonksiyonları
+    function setBoxTarget(target) {
+      boxTarget = target;
+      if (customBoxItems.length > boxTarget) {
+        customBoxItems = customBoxItems.slice(0, boxTarget);
+      }
+      document.getElementById("btnBox3").className = target === 3 ? "px-4 py-1.5 text-xs font-bold rounded-lg transition bg-slate-900 text-white" : "px-4 py-1.5 text-xs font-bold rounded-lg transition text-slate-600 hover:text-slate-900";
+      document.getElementById("btnBox5").className = target === 5 ? "px-4 py-1.5 text-xs font-bold rounded-lg transition bg-slate-900 text-white" : "px-4 py-1.5 text-xs font-bold rounded-lg transition text-slate-600 hover:text-slate-900";
+      renderBoxSlots();
+    }
+
+    function renderBoxSlots() {
+      const container = document.getElementById("boxSlotsContainer");
+      const slots = [];
+      for (let i = 0; i < boxTarget; i++) {
+        const item = customBoxItems[i];
+        if (item) {
+          slots.push(`
+            <div class="relative bg-white border border-slate-900 rounded-xl p-2 flex flex-col items-center text-center shadow-xs cursor-pointer hover:shadow-md transition" onclick="openProductModal(${item.id})">
+              <button onclick="event.stopPropagation(); removeBoxItem(${i})" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-[10px]" title="Kaldır">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+              <img src="${item.image}" class="w-12 h-14 object-cover rounded-md mb-1">
+              <span class="text-[10px] font-bold text-slate-900 truncate w-full hover:underline">${item.title}</span>
+              <span class="text-[9px] text-silver-500">Beden: ${item.size}</span>
+            </div>
+          `);
+        } else {
+          slots.push(`
+            <div class="border-2 border-dashed border-silver-300 rounded-xl p-3 flex flex-col items-center justify-center text-center bg-white/50 min-h-[90px]">
+              <i class="fa-solid fa-plus text-silver-400 text-sm mb-1"></i>
+              <span class="text-[10px] text-silver-500">Çorap Seçin</span>
+            </div>
+          `);
+        }
+      }
+      container.innerHTML = slots.join("");
+
+      const pct = (customBoxItems.length / boxTarget) * 100;
+      document.getElementById("boxProgressBar").style.width = `${pct}%`;
+      document.getElementById("boxCountLabel").textContent = `${customBoxItems.length} / ${boxTarget}`;
+
+      document.getElementById("floatingBoxCount").textContent = customBoxItems.length;
+      document.getElementById("floatingBoxTarget").textContent = boxTarget;
+
+      const addBtn = document.getElementById("addBoxToCartBtn");
+      if (customBoxItems.length === boxTarget) {
+        addBtn.disabled = false;
+        addBtn.className = "w-full sm:w-auto px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs uppercase tracking-wider transition cursor-pointer shadow-lg";
+      } else {
+        addBtn.disabled = true;
+        addBtn.className = "w-full sm:w-auto px-5 py-3 rounded-xl bg-silver-300 text-slate-500 font-bold text-xs uppercase tracking-wider transition cursor-not-allowed";
+      }
+    }
+
+    function addItemToBox(product, size = "36-40") {
+      if (customBoxItems.length >= boxTarget) {
+        alert(`Kutunuz zaten dolu (${boxTarget}'li). Kutuyu sepete ekleyebilir veya parçaları değiştirebilirsiniz.`);
+        return;
+      }
+      customBoxItems.push({
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        image: product.image,
+        images: product.images,
+        size: size,
+        categoryName: product.categoryName,
+        description: product.description,
+        fabric: product.fabric
+      });
+      renderBoxSlots();
+    }
+
+    function removeBoxItem(index) {
+      customBoxItems.splice(index, 1);
+      renderBoxSlots();
+    }
+
+    function addModalItemToBox() {
+      if (!selectedModalProduct) return;
+      addItemToBox(selectedModalProduct, selectedSize);
+      closeProductModal();
+    }
+
+    function addCustomBoxToCart() {
+      if (customBoxItems.length !== boxTarget) return;
+
+      const rawTotal = customBoxItems.reduce((acc, cur) => acc + cur.price, 0);
+      const discountedTotal = Math.round(rawTotal * 0.80);
+
+      cart.push({
+        id: Date.now(),
+        title: `Özel ${boxTarget}'lü Gümüş Koleksiyon Kutusu`,
+        price: discountedTotal,
+        rawPrice: rawTotal,
+        image: customBoxItems[0].image,
+        size: "Karışık Beden",
+        qty: 1,
+        isCustomBox: true,
+        boxItems: [...customBoxItems]
+      });
+
+      customBoxItems = [];
+      renderBoxSlots();
+      updateCartBadge();
+      updateCartDrawer();
+      toggleCartDrawer(true);
+    }
+
+    // 2. KUTU İÇERİK MODALI & İNDİRİMLİ FİYAT GÖSTERİMİ
+    function viewCartBoxDetails(cartItemId) {
+      const item = cart.find(i => i.id === cartItemId);
+      if (!item || !item.boxItems) return;
+
+      document.getElementById("boxDetailModalTitle").textContent = item.title;
+      document.getElementById("boxDetailModalSubtitle").textContent = `Toplam ${item.boxItems.length} Çift Premium Çorap (Detay için çoraba tıklayın)`;
+
+      const rawTotal = item.rawPrice || item.boxItems.reduce((sum, p) => sum + p.price, 0);
+      const discountedTotal = item.price;
+      const savings = rawTotal - discountedTotal;
+
+      document.getElementById("boxOriginalPrice").textContent = `${rawTotal.toFixed(2)} ₺`;
+      document.getElementById("boxDiscountedPrice").textContent = `${discountedTotal.toFixed(2)} ₺`;
+      document.getElementById("boxSavingsAmount").textContent = `${savings.toFixed(2)} ₺ cebinizde kalır`;
+      document.getElementById("boxFooterPrice").textContent = `${discountedTotal.toFixed(2)} ₺ (%20 İndirimli)`;
+
+      document.getElementById("boxListView").classList.remove("hidden");
+      document.getElementById("boxSubItemDetailView").classList.add("hidden");
+
+      const list = document.getElementById("boxDetailModalList");
+      list.innerHTML = item.boxItems.map((prod, index) => `
+        <div class="flex items-center gap-3 p-2.5 bg-silver-50 rounded-xl border border-silver-200 cursor-pointer hover:border-slate-800 transition" onclick="showBoxSubItemDetail(${prod.id}, '${prod.size}')">
+          <span class="w-5 h-5 rounded-full bg-slate-900 text-white text-[10px] font-bold flex items-center justify-center">${index + 1}</span>
+          <img src="${prod.image}" class="w-12 h-14 object-cover rounded-lg border border-silver-300">
+          <div class="flex-1 min-w-0">
+            <h5 class="text-xs font-bold text-slate-900 truncate hover:underline">${prod.title}</h5>
+            <span class="text-[11px] text-silver-500">Seçilen Beden: <b class="text-slate-800">${prod.size}</b></span>
+          </div>
+          <span class="text-xs font-bold text-slate-900">${prod.price} ₺</span>
+        </div>
+      `).join("");
+
+      document.getElementById("boxDetailModal").classList.remove("hidden");
+    }
+
+    function showBoxSubItemDetail(productId, size) {
+      const prod = PRODUCTS.find(p => p.id === productId);
+      if (!prod) return;
+
+      document.getElementById("boxSubItemImg").src = prod.image;
+      document.getElementById("boxSubItemCat").textContent = prod.categoryName;
+      document.getElementById("boxSubItemTitle").textContent = prod.title;
+      document.getElementById("boxSubItemPrice").textContent = `${prod.price} ₺`;
+      document.getElementById("boxSubItemDesc").textContent = `${prod.description} Kumaş: ${prod.fabric}.`;
+      document.getElementById("boxSubItemSize").textContent = size;
+
+      document.getElementById("boxListView").classList.add("hidden");
+      document.getElementById("boxSubItemDetailView").classList.remove("hidden");
+    }
+
+    function returnToBoxList() {
+      document.getElementById("boxSubItemDetailView").classList.add("hidden");
+      document.getElementById("boxListView").classList.remove("hidden");
+    }
+
+    function handleBoxModalClose() {
+      const isSubDetailOpen = !document.getElementById("boxSubItemDetailView").classList.contains("hidden");
+      if (isSubDetailOpen) {
+        returnToBoxList();
+      } else {
+        closeBoxDetailModal();
+      }
+    }
+
+    function closeBoxDetailModal() {
+      document.getElementById("boxDetailModal").classList.add("hidden");
+      returnToBoxList();
+    }
+
+    // 3. ÇOKLU GÖRSEL SLIDER MOTORU
+    function setupModalSlider(images) {
+      currentSliderImages = (images && images.length > 0) ? images : [selectedModalProduct.image];
+      currentSliderIndex = 0;
+      updateSliderView();
+    }
+
+    function updateSliderView() {
+      const mainImg = document.getElementById("modalSliderMainImg");
+      const counter = document.getElementById("modalSliderCounter");
+      const thumbsContainer = document.getElementById("modalThumbnailsContainer");
+
+      mainImg.src = currentSliderImages[currentSliderIndex];
+      counter.textContent = `${currentSliderIndex + 1} / ${currentSliderImages.length}`;
+
+      thumbsContainer.innerHTML = currentSliderImages.map((imgSrc, idx) => `
         <button 
-          onclick="filterCategory('${cat.id}')"
-          class="px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition ${
-            currentCategory === cat.id 
-              ? 'bg-slate-900 text-white shadow-sm' 
-              : 'text-slate-600 hover:text-slate-900 hover:bg-silver-100'
+          type="button" 
+          onclick="setSliderIndex(${idx})" 
+          class="relative w-14 h-16 rounded-lg overflow-hidden border-2 transition-all flex-shrink-0 ${
+            idx === currentSliderIndex 
+              ? 'border-slate-900 shadow-sm scale-105' 
+              : 'border-silver-200 opacity-60 hover:opacity-100 hover:border-silver-400'
           }"
         >
-          ${cat.name}
+          <img src="${imgSrc}" class="w-full h-full object-cover">
         </button>
       `).join("");
+    }
+
+    function setSliderIndex(index) {
+      currentSliderIndex = index;
+      updateSliderView();
+    }
+
+    function nextSliderImage() {
+      currentSliderIndex = (currentSliderIndex + 1) % currentSliderImages.length;
+      updateSliderView();
+    }
+
+    function prevSliderImage() {
+      currentSliderIndex = (currentSliderIndex - 1 + currentSliderImages.length) % currentSliderImages.length;
+      updateSliderView();
+    }
+
+    function openProductModalFromCart(productId) {
+      openedFromCart = true;
+      toggleCartDrawer(false);
+      openProductModal(productId);
+    }
+
+    function openProductModal(id) {
+      const product = PRODUCTS.find(p => p.id === id);
+      if (!product) return;
+
+      selectedModalProduct = product;
+      
+      setupModalSlider(product.images || [product.image]);
+
+      document.getElementById("modalCat").textContent = product.categoryName;
+      document.getElementById("modalTitle").textContent = product.title;
+      document.getElementById("modalPrice").textContent = `${product.price} ₺`;
+      document.getElementById("modalOldPrice").textContent = product.oldPrice ? `${product.oldPrice} ₺` : "";
+      document.getElementById("modalDesc").textContent = `${product.description} Kumaş İçeriği: ${product.fabric}.`;
+      document.getElementById("modalStockBadge").innerHTML = `<i class="fa-solid fa-fire text-amber-500"></i> Son ${product.stock} Çift Kaldı`;
+
+      renderReviews(product);
+      document.getElementById("productModal").classList.remove("hidden");
+    }
+
+    function closeProductModal() {
+      document.getElementById("productModal").classList.add("hidden");
+      if (openedFromCart) {
+        toggleCartDrawer(true);
+        openedFromCart = false;
+      }
+    }
+
+    function toggleCartItemAccordion(id) {
+      const el = document.getElementById(`boxAccordion-${id}`);
+      const icon = document.getElementById(`boxAccordionIcon-${id}`);
+      if (!el) return;
+
+      if (el.classList.contains("hidden")) {
+        el.classList.remove("hidden");
+        icon.className = "fa-solid fa-chevron-up text-[10px]";
+      } else {
+        el.classList.add("hidden");
+        icon.className = "fa-solid fa-chevron-down text-[10px]";
+      }
+    }
+
+    // 4. Sepet Çekmecesini Çizme
+    function updateCartDrawer() {
+      const list = document.getElementById("cartItemsList");
+      if (cart.length === 0) {
+        list.innerHTML = `<div class="text-center py-16 text-silver-400 text-xs">Sepetinizde ürün bulunmuyor.</div>`;
+      } else {
+        list.innerHTML = cart.map((item, idx) => {
+          if (item.isCustomBox && item.boxItems) {
+            const rawSum = item.rawPrice || item.boxItems.reduce((s, p) => s + p.price, 0);
+            return `
+              <div class="bg-silver-50/90 rounded-xl border border-slate-300 p-3 shadow-xs space-y-2">
+                <div class="flex items-start gap-3">
+                  <div class="relative cursor-pointer" onclick="viewCartBoxDetails(${item.id})">
+                    <img src="${item.image}" class="w-16 h-20 object-cover rounded-lg border border-silver-300 shadow-xs">
+                    <span class="absolute -top-1.5 -left-1.5 bg-slate-900 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full">
+                      ${item.boxItems.length}'lü Set
+                    </span>
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-[9px] font-bold uppercase tracking-wider text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded">Özel Koleksiyon</span>
+                    </div>
+                    <h5 class="text-xs font-bold text-slate-900 truncate mt-0.5 cursor-pointer hover:underline" onclick="viewCartBoxDetails(${item.id})">${item.title}</h5>
+                    
+                    <div class="flex items-baseline gap-1.5 mt-1">
+                      <span class="text-xs font-extrabold text-slate-900">${item.price} ₺</span>
+                      <span class="text-[10px] text-slate-400 line-through font-semibold">${rawSum} ₺</span>
+                      <span class="text-[10px] text-emerald-600 font-bold">(%20)</span>
+                    </div>
+                    
+                    <button onclick="viewCartBoxDetails(${item.id})" class="text-[11px] text-slate-700 hover:text-black underline font-semibold flex items-center gap-1 mt-1">
+                      <i class="fa-regular fa-eye"></i> Kutu İçeriğini İncele (${item.boxItems.length} Çorap)
+                    </button>
+                  </div>
+
+                  <div class="flex items-center border border-silver-300 bg-white rounded-lg px-2 py-1 gap-2">
+                    <button onclick="changeQty(${idx}, -1)" class="text-xs font-bold text-silver-600">-</button>
+                    <span class="text-xs font-bold">${item.qty}</span>
+                    <button onclick="changeQty(${idx}, 1)" class="text-xs font-bold text-silver-600">+</button>
+                  </div>
+                </div>
+
+                <div class="border-t border-silver-200 pt-2">
+                  <button onclick="toggleCartItemAccordion(${item.id})" class="w-full flex items-center justify-between text-[11px] font-semibold text-slate-600 hover:text-black py-0.5">
+                    <span>Hızlı İçerik Listesi (Detay İçin Tıklayın)</span>
+                    <i id="boxAccordionIcon-${item.id}" class="fa-solid fa-chevron-down text-[10px]"></i>
+                  </button>
+                  <div id="boxAccordion-${item.id}" class="hidden mt-2 space-y-1.5 bg-white p-2 rounded-lg border border-silver-200 text-[11px]">
+                    ${item.boxItems.map((bi, bIdx) => `
+                      <div class="flex items-center justify-between text-slate-700 border-b border-silver-100 last:border-b-0 pb-1 last:pb-0 cursor-pointer hover:text-black" onclick="openProductModalFromCart(${bi.id})">
+                        <div class="flex items-center gap-2 truncate pr-2">
+                          <span class="font-bold text-slate-900">${bIdx + 1}.</span>
+                          <img src="${bi.image}" class="w-6 h-7 object-cover rounded">
+                          <span class="truncate hover:underline">${bi.title}</span>
+                        </div>
+                        <span class="text-slate-500 whitespace-nowrap text-[10px]">Beden: ${bi.size}</span>
+                      </div>
+                    `).join("")}
+                  </div>
+                </div>
+              </div>
+            `;
+          } else {
+            return `
+              <div class="flex items-center gap-3 p-2.5 bg-silver-50 rounded-xl border border-silver-200">
+                <img src="${item.image}" class="w-14 h-16 object-cover rounded-lg border border-silver-200 cursor-pointer hover:opacity-80 transition" onclick="openProductModalFromCart(${item.id})" title="Ürün Detayını İncele">
+                <div class="flex-1 min-w-0">
+                  <h5 class="text-xs font-bold text-slate-900 truncate cursor-pointer hover:underline" onclick="openProductModalFromCart(${item.id})">${item.title}</h5>
+                  <div class="text-[10px] text-silver-500 uppercase mt-0.5">Beden: ${item.size}</div>
+                  <div class="text-xs font-extrabold text-slate-900 mt-1">${item.price} ₺</div>
+                </div>
+                <div class="flex items-center border border-silver-300 bg-white rounded-lg px-2 py-1 gap-2">
+                  <button onclick="changeQty(${idx}, -1)" class="text-xs font-bold text-silver-600">-</button>
+                  <span class="text-xs font-bold">${item.qty}</span>
+                  <button onclick="changeQty(${idx}, 1)" class="text-xs font-bold text-silver-600">+</button>
+                </div>
+              </div>
+            `;
+          }
+        }).join("");
+      }
+
+      const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+      const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+
+      let discountRate = 0;
+      let nextTierMsg = "3 Ürün Alana %10 İndirim";
+      let tierProgress = Math.min(100, (totalQty / 3) * 100);
+
+      if (totalQty >= 5) {
+        discountRate = 0.20;
+        nextTierMsg = "🎉 Tebrikler! Maksimum %20 İndirim Uygulandı";
+        tierProgress = 100;
+      } else if (totalQty >= 3) {
+        discountRate = 0.10;
+        nextTierMsg = "5 Ürüne %20 İndirim İçin " + (5 - totalQty) + " Çift Daha Ekleyin";
+        tierProgress = (totalQty / 5) * 100;
+      }
+
+      document.getElementById("tierProgressBar").style.width = `${tierProgress}%`;
+      document.getElementById("tierDiscountText").innerHTML = `<span>Katmanlı İndirim:</span> <span class="text-amber-600 font-bold">${nextTierMsg}</span>`;
+
+      const discountAmount = subtotal * discountRate;
+      const finalTotal = Math.max(0, subtotal - discountAmount);
+
+      document.getElementById("cartSubtotal").textContent = `${subtotal.toFixed(2)} ₺`;
+      if (discountRate > 0) {
+        document.getElementById("cartDiscountRow").style.display = "flex";
+        document.getElementById("cartDiscountLabel").textContent = `%${discountRate * 100} Çoklu Alım İndirimi`;
+        document.getElementById("cartDiscountAmount").textContent = `-${discountAmount.toFixed(2)} ₺`;
+      } else {
+        document.getElementById("cartDiscountRow").style.display = "none";
+      }
+
+      document.getElementById("cartFinalTotal").textContent = `${finalTotal.toFixed(2)} ₺`;
+    }
+
+    function orderViaWhatsApp() {
+      if (cart.length === 0) return alert("Sepetiniz boş.");
+
+      let msg = "Merhaba TOOPUK! Web sitenizden sipariş vermek istiyorum:%0A%0A";
+      cart.forEach((item, index) => {
+        if (item.isCustomBox && item.boxItems) {
+          const rawSum = item.rawPrice || item.boxItems.reduce((s, p) => s + p.price, 0);
+          msg += `📦 *${item.title}* - ~${rawSum} TL~ yerine *${item.price} TL* (%20 İndirimli)%0A`;
+          item.boxItems.forEach((sub, sIdx) => {
+            msg += `   └ ${sIdx + 1}. ${sub.title} (Beden: ${sub.size})%0A`;
+          });
+        } else {
+          msg += `${index + 1}. *${item.title}* (Beden: ${item.size}) - ${item.qty} adet - ${item.price * item.qty} TL%0A`;
+        }
+      });
+
+      const isGift = document.getElementById("giftCheckbox").checked;
+      const giftNote = document.getElementById("giftNoteText").value.trim();
+      if (isGift && giftNote) {
+        msg += `%0A🎁 *Hediye Notu:* "${giftNote}"%0A`;
+      }
+
+      const total = document.getElementById("cartFinalTotal").textContent;
+      msg += `%0A*Genel Toplam:* ${total}%0AAdres ve ödeme bilgisi alabilir miyim?`;
+
+      window.open(`https://wa.me/905000000000?text=${msg}`, "_blank");
+    }
+
+    // Ürün Listesi
+    function renderCategories() {
+      const container = document.getElementById("categoryNav");
+      container.innerHTML = CATEGORIES.map(cat => {
+        if (cat.id === "box_creator") {
+          return `
+            <button onclick="scrollToBoxCreator()" class="px-4 py-2 rounded-full text-xs font-bold tracking-wider uppercase transition bg-gradient-to-r from-slate-900 to-slate-800 text-amber-400 hover:from-black hover:to-slate-900 shadow-sm flex items-center gap-1.5">
+              ${cat.name}
+            </button>
+          `;
+        }
+        return `
+          <button onclick="filterCategory('${cat.id}')" class="px-4 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition ${currentCategory === cat.id ? 'bg-slate-900 text-white shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-silver-100'}">
+            ${cat.name}
+          </button>
+        `;
+      }).join("");
     }
 
     function filterCategory(id) {
@@ -708,20 +1395,32 @@
           <div class="group silver-gradient-border bg-white rounded-2xl overflow-hidden shadow-xs hover:shadow-xl transition-all duration-500 flex flex-col justify-between">
             <div class="relative w-full aspect-[4/5] bg-silver-100 overflow-hidden cursor-pointer" onclick="openProductModal(${item.id})">
               <img src="${item.image}" alt="${item.title}" class="img-showcase w-full h-full object-cover">
-              <div class="absolute top-3 left-3">
+              
+              <div class="absolute top-3 left-3 flex flex-col gap-1">
                 <span class="silver-badge text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-full shadow-xs">
                   ${item.fabric.split(',')[0]}
                 </span>
+                ${item.stock <= 5 ? `
+                  <span class="bg-amber-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-xs">
+                    Son ${item.stock} Adet
+                  </span>
+                ` : ''}
               </div>
+
               <button onclick="event.stopPropagation(); toggleFavorite(${item.id})" class="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/90 hover:bg-white flex items-center justify-center text-slate-400 hover:text-red-500 shadow-md transition">
                 <i class="${isFav ? 'fa-solid text-red-500' : 'fa-regular'} fa-heart text-sm"></i>
               </button>
-              <div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                <button onclick="event.stopPropagation(); openProductModal(${item.id})" class="w-full py-2.5 bg-slate-900/90 backdrop-blur-xs hover:bg-slate-900 text-white text-xs font-bold uppercase tracking-widest rounded-xl transition shadow-lg flex items-center justify-center gap-2">
-                  <i class="fa-regular fa-eye"></i> İncele & Seç
+
+              <div class="absolute inset-x-3 bottom-3 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 flex gap-2">
+                <button onclick="event.stopPropagation(); openProductModal(${item.id})" class="flex-1 py-2.5 bg-slate-900/90 backdrop-blur-xs hover:bg-slate-900 text-white text-xs font-bold uppercase tracking-widest rounded-xl transition shadow-lg flex items-center justify-center gap-1.5">
+                  <i class="fa-regular fa-eye"></i> İncele
+                </button>
+                <button onclick="event.stopPropagation(); addItemToBox(PRODUCTS.find(p=>p.id===${item.id}))" class="px-3 py-2.5 bg-white/95 hover:bg-white text-slate-900 text-xs font-bold rounded-xl transition shadow-lg" title="Özel Kutuya Ekle">
+                  + Kutu
                 </button>
               </div>
             </div>
+
             <div class="p-4 sm:p-5 flex-1 flex flex-col justify-between">
               <div>
                 <span class="text-[10px] uppercase font-bold tracking-widest text-silver-400 block mb-1">${item.categoryName}</span>
@@ -744,59 +1443,14 @@
       }).join("");
     }
 
-    function handleSearch(val) {
-      searchQuery = val;
-      renderProducts();
-    }
-    function handleSort(val) {
-      sortMode = val;
-      renderProducts();
-    }
+    function handleSearch(val) { searchQuery = val; renderProducts(); }
+    function handleSort(val) { sortMode = val; renderProducts(); }
     function resetFilters() {
       currentCategory = "all";
       searchQuery = "";
       document.getElementById("searchInput").value = "";
       renderCategories();
       renderProducts();
-    }
-
-    // Bilgi Modalı Aç/Kapat
-    function openInfoModal(key) {
-      const data = INFO_CONTENTS[key];
-      if (!data) return;
-
-      document.getElementById("infoModalTitle").textContent = data.title;
-      document.getElementById("infoModalIcon").innerHTML = `<i class="${data.icon}"></i>`;
-      document.getElementById("infoModalBody").innerHTML = data.body;
-      document.getElementById("infoModal").classList.remove("hidden");
-    }
-
-    function closeInfoModal() {
-      document.getElementById("infoModal").classList.add("hidden");
-    }
-
-    // Ürün Detay Modalı
-    function openProductModal(id) {
-      const product = PRODUCTS.find(p => p.id === id);
-      if (!product) return;
-
-      selectedModalProduct = product;
-      document.getElementById("modalImg").src = product.image;
-      document.getElementById("modalCat").textContent = product.categoryName;
-      document.getElementById("modalTitle").textContent = product.title;
-      document.getElementById("modalPrice").textContent = `${product.price} ₺`;
-      document.getElementById("modalOldPrice").textContent = product.oldPrice ? `${product.oldPrice} ₺` : "";
-      document.getElementById("modalDesc").textContent = `${product.description} Kumaş İçeriği: ${product.fabric}.`;
-
-      const stars = document.getElementById("modalStars");
-      stars.innerHTML = Array(5).fill(0).map((_, i) => `<i class="fa-solid fa-star ${i < Math.floor(product.rating) ? 'text-amber-500' : 'text-silver-300'}"></i>`).join("") + `<span class="ml-1.5 text-slate-500 text-xs">(${product.reviewsCount})</span>`;
-
-      renderReviews(product);
-      document.getElementById("productModal").classList.remove("hidden");
-    }
-
-    function closeProductModal() {
-      document.getElementById("productModal").classList.add("hidden");
     }
 
     function selectSize(size, el) {
@@ -810,12 +1464,13 @@
     function renderReviews(product) {
       const list = document.getElementById("modalReviewsList");
       list.innerHTML = (product.reviews || []).map(r => `
-        <div class="bg-white p-2.5 rounded-lg border border-silver-200 text-xs">
+        <div class="bg-white p-3 rounded-lg border border-silver-200 text-xs">
           <div class="flex justify-between font-bold text-slate-900">
             <span>${r.user}</span>
             <span class="text-amber-500">⭐ ${r.rating}</span>
           </div>
           <p class="text-slate-600 mt-1 text-[11px]">${r.comment}</p>
+          ${r.photo ? `<img src="${r.photo}" class="w-12 h-12 object-cover rounded-md mt-2 border border-silver-200">` : ''}
         </div>
       `).join("");
     }
@@ -824,22 +1479,41 @@
       e.preventDefault();
       const txt = document.getElementById("reviewComment").value.trim();
       if (!txt || !selectedModalProduct) return;
-      selectedModalProduct.reviews.unshift({ user: "Değerli Müşteri", rating: 5, comment: txt });
-      selectedModalProduct.reviewsCount += 1;
+      selectedModalProduct.reviews.unshift({ user: "Misafir Alıcı", rating: 5, comment: txt });
       document.getElementById("reviewComment").value = "";
       renderReviews(selectedModalProduct);
     }
 
-    // Sepet
     function addCurrentModalToCart() {
       if (!selectedModalProduct) return;
-      const exist = cart.find(i => i.id === selectedModalProduct.id && i.size === selectedSize);
-      if (exist) exist.qty += 1;
-      else cart.push({ ...selectedModalProduct, size: selectedSize, qty: 1 });
-
+      addToCart(selectedModalProduct, selectedSize);
       closeProductModal();
-      updateCartBadge();
       toggleCartDrawer(true);
+    }
+
+    function addToCart(product, size = "36-40") {
+      const exist = cart.find(i => i.id === product.id && i.size === size && !i.isCustomBox);
+      if (exist) exist.qty += 1;
+      else cart.push({ ...product, size: size, qty: 1 });
+
+      updateCartBadge();
+      updateCartDrawer();
+    }
+
+    function addUpsellProduct() {
+      const babet = PRODUCTS.find(p => p.id === 5);
+      if (babet) {
+        cart.push({
+          id: 5,
+          title: "Görünmez Silikon Taban Babet (Fırsat)",
+          price: 65,
+          image: babet.image,
+          size: "36-40",
+          qty: 1
+        });
+        updateCartBadge();
+        updateCartDrawer();
+      }
     }
 
     function changeQty(idx, d) {
@@ -864,48 +1538,51 @@
 
     function updateCartBadge() {
       const count = cart.reduce((s, i) => s + i.qty, 0);
-      const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
       document.getElementById("cartCountBadge").textContent = count;
       document.getElementById("cartItemCount").textContent = count;
-      document.getElementById("headerCartTotal").textContent = `${total} ₺`;
+      const subtotal = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+      document.getElementById("headerCartTotal").textContent = `${subtotal} ₺`;
     }
 
-    function updateCartDrawer() {
-      const list = document.getElementById("cartItemsList");
-      if (cart.length === 0) {
-        list.innerHTML = `<div class="text-center py-16 text-silver-400 text-xs">Sepetinizde ürün bulunmuyor.</div>`;
-      } else {
-        list.innerHTML = cart.map((item, idx) => `
-          <div class="flex items-center gap-3 p-2.5 bg-silver-50 rounded-xl border border-silver-200">
-            <img src="${item.image}" class="w-14 h-16 object-cover rounded-lg border border-silver-200">
-            <div class="flex-1 min-w-0">
-              <h5 class="text-xs font-bold text-slate-900 truncate">${item.title}</h5>
-              <div class="text-[10px] text-silver-500 uppercase mt-0.5">Beden: ${item.size}</div>
-              <div class="text-xs font-extrabold text-slate-900 mt-1">${item.price} ₺</div>
-            </div>
-            <div class="flex items-center border border-silver-300 bg-white rounded-lg px-2 py-1 gap-2">
-              <button onclick="changeQty(${idx}, -1)" class="text-xs font-bold text-silver-600">-</button>
-              <span class="text-xs font-bold">${item.qty}</span>
-              <button onclick="changeQty(${idx}, 1)" class="text-xs font-bold text-silver-600">+</button>
-            </div>
-          </div>
-        `).join("");
-      }
-
-      const total = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-      document.getElementById("cartSubtotal").textContent = `${total.toFixed(2)} ₺`;
-      document.getElementById("cartFinalTotal").textContent = `${total.toFixed(2)} ₺`;
+    function toggleGiftNote(isChecked) {
+      document.getElementById("giftNoteContainer").classList.toggle("hidden", !isChecked);
     }
 
     function completeCheckout() {
       if (cart.length === 0) return alert("Sepetiniz boş.");
-      alert("iyzico 256-Bit Güvenli Ödeme Ekranı Açılıyor... (Test Simülasyonu)");
+      alert("iyzico 256-Bit Güvenli Ödeme Ekranına Yönlendiriliyorsunuz... (Test Modu)");
       cart = [];
       updateCartBadge();
       toggleCartDrawer(false);
     }
 
-    // Favoriler
+    function handleExitIntent(e) {
+      if (e.clientY <= 10 && !exitIntentTriggered && cart.length > 0) {
+        exitIntentTriggered = true;
+        document.getElementById("exitIntentModal").classList.remove("hidden");
+      }
+    }
+    function closeExitIntentModal() { document.getElementById("exitIntentModal").classList.add("hidden"); }
+    function copyExitCoupon() {
+      navigator.clipboard.writeText("KARGOBEDAVA");
+      const btn = document.getElementById("copyCouponBtn");
+      btn.textContent = "Kopyalandı!";
+      btn.className = "px-3 py-1 bg-emerald-600 text-white text-xs font-semibold rounded-lg";
+    }
+
+    function openSizeGuideModal() { document.getElementById("sizeGuideModal").classList.remove("hidden"); }
+    function closeSizeGuideModal() { document.getElementById("sizeGuideModal").classList.add("hidden"); }
+
+    function openInfoModal(key) {
+      const data = INFO_CONTENTS[key];
+      if (!data) return;
+      document.getElementById("infoModalTitle").textContent = data.title;
+      document.getElementById("infoModalIcon").innerHTML = `<i class="${data.icon}"></i>`;
+      document.getElementById("infoModalBody").innerHTML = data.body;
+      document.getElementById("infoModal").classList.remove("hidden");
+    }
+    function closeInfoModal() { document.getElementById("infoModal").classList.add("hidden"); }
+
     function toggleFavorite(id) {
       if (favorites.includes(id)) favorites = favorites.filter(x => x !== id);
       else favorites.push(id);
@@ -914,22 +1591,19 @@
       b.classList.toggle("hidden", favorites.length === 0);
       renderProducts();
     }
-
     function openFavoritesModal() {
       if (favorites.length === 0) return alert("Henüz favorilere ürün eklemediniz.");
       const favs = PRODUCTS.filter(p => favorites.includes(p.id));
       document.getElementById("currentCategoryTitle").textContent = "Kayıtlı Favorilerim";
       document.getElementById("productGrid").innerHTML = favs.map(item => `
         <div class="bg-white border border-silver-200 rounded-xl p-3 shadow-xs">
-          <img src="${item.image}" class="aspect-[4/5] object-cover rounded-lg w-full mb-3">
-          <h4 class="text-xs font-bold text-slate-900 truncate">${item.title}</h4>
+          <img src="${item.image}" class="aspect-[4/5] object-cover rounded-lg w-full mb-3 cursor-pointer" onclick="openProductModal(${item.id})">
+          <h4 class="text-xs font-bold text-slate-900 truncate hover:underline cursor-pointer" onclick="openProductModal(${item.id})">${item.title}</h4>
           <span class="text-xs font-extrabold text-slate-900 block mt-1">${item.price} ₺</span>
           <button onclick="openProductModal(${item.id})" class="w-full mt-2 py-1.5 bg-slate-900 text-white text-xs rounded-lg">İncele</button>
         </div>
       `).join("");
     }
-
-    // E-Bülten
     function handleNewsletter(e) {
       e.preventDefault();
       document.getElementById("newsletterNotice").classList.remove("hidden");
